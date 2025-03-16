@@ -8,8 +8,13 @@ import styles from "@/app/ui/home.module.css";
 export default function Page() {
   return (
     <main className="flex min-h-screen flex-col p-6">
-      <div className="bg-blue-400 px-3 py-4 rounded-md shadow-md">
+      <div className="bg-blue-400 px-3 py-4 rounded-md shadow-md flex flex-row align-middle justify-between">
         <AcmeLogo />
+        <Link href="/dashboard">
+          <div className="flex items-center gap-2 h-full">
+            <span className="text-white font-semibold">Dashboard</span>
+          </div>
+        </Link>
       </div>
       <div className="mt-4 flex grow flex-col gap-4 md:flex-row">
         <div className="flex flex-col justify-center gap-6 rounded-lg bg-gray-50 px-6 py-10 md:w-2/5 md:px-20">
