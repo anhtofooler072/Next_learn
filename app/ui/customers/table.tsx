@@ -5,12 +5,33 @@ import {
   CustomersTableType,
   FormattedCustomersTable,
 } from '@/app/lib/definitions';
+import { fetchCustomers, fetchFilteredCustomers } from '@/app/lib/data';
+import { get } from 'http';
+
+export async function getCustomerID() {
+  const allCustomers = await fetchCustomers();
+  console.log(allCustomers);
+}
 
 export default async function CustomersTable({
-  customers,
+  customers, query
 }: {
   customers: FormattedCustomersTable[];
+  query: string;
 }) {
+  const rawcustomers = await fetchFilteredCustomers(query);
+  // format customers
+  customers = rawcustomers.map((customer) => ({
+    id: customer.id,
+    name: customer.name,
+    email: customer.email,
+    image_url: customer.image_url,
+    total_invoices: customer.total_invoices,
+    total_pending: customer.total_pending,
+    total_paid: customer.total_paid,
+  }));
+
+  console.log(customers);
   return (
     <div className="w-full">
       <h1 className={`${lusitana.className} mb-8 text-xl md:text-2xl`}>
